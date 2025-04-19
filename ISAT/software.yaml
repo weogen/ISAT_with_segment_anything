@@ -36,7 +36,7 @@ shortcut:
     key: Z
   actionBit_map:
     default_key: Space
-    key: Space
+    key: E
   actionCancel:
     default_key: Esc
     key: Esc
@@ -48,7 +48,7 @@ shortcut:
     key: Ctrl+C
   actionDelete:
     default_key: Del
-    key: Del
+    key: W
   actionEdit:
     default_key: ''
     key: ''
@@ -60,10 +60,10 @@ shortcut:
     key: ''
   actionFinish:
     default_key: E
-    key: E
+    key: F
   actionFit_window:
     default_key: F
-    key: F
+    key: G
   actionImages_dir:
     default_key: ''
     key: ''
@@ -84,7 +84,7 @@ shortcut:
     key: Tab
   actionNext_image:
     default_key: D
-    key: D
+    key: Space
   actionPolygon:
     default_key: C
     key: C
@@ -108,7 +108,7 @@ shortcut:
     key: W
   actionSegment_anything_point:
     default_key: Q
-    key: Q
+    key: D
   actionSetting:
     default_key: ''
     key: ''
@@ -152,11 +152,12 @@ shortcut:
     default_key: ''
     key: ''
 software:
-  auto_save: false
+  auto_save: true
   contour_mode: external
   create_mode_invisible_polygon: true
-  language: en
+  language: zh
   mask_alpha: 0.6
+  real_time_area: false
   show_edge: true
   show_prompt: true
   use_bfloat16: false

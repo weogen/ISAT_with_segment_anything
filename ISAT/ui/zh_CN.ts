@@ -1556,6 +1556,16 @@ p, li { white-space: pre-wrap; }
         <translation>显示/隐藏</translation>
     </message>
     <message>
+        <location filename="MainWindow.py" line="516"/>
+        <source>toggle filter</source>
+        <translation>图片过滤翻页</translation>
+    </message>
+    <message>
+        <location filename="MainWindow.py" line="517"/>
+        <source>just jump to image with json file.</source>
+        <translation>仅跳转至已标注图片(存在JSON文件)</translation>
+    </message>
+    <message>
         <location filename="MainWindow.py" line="535"/>
         <source>V</source>
         <translation></translation>

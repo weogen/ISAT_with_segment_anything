@@ -6,3 +6,5 @@ ISAT/isat.yaml
 *.yaml
 ISAT/software.yaml
 ISAT/isat.yaml
+
+ISAT/checkpoints/*

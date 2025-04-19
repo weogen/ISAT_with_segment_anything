@@ -3,5 +3,5 @@
   <component name="Black">
     <option name="sdkName" value="isat_env" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="isat_env" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.8 (venv_ISAT_torch-2.2.1_cp38)" project-jdk-type="Python SDK" />
 </project>

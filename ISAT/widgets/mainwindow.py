@@ -414,6 +414,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.check_latest_version_thread.tag.connect(self.latest_version_tip)
         self.check_latest_version_thread.start()
 
+        self.filter_annotated = False  #weijinge,用于切换图片时只跳到有json的图片的flag
+    
+        self.actionToggleFilter.setChecked(False)
+        self.actionToggleFilter.toggled.connect(self.toggle_filter_mode)
+       
+
+
+
     def init_segment_anything(self, model_name=None, checked=None):
         if checked is not None and not checked:
             return
@@ -1055,27 +1063,109 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             else:
                 self.actionNext_image.setEnabled(False)
 
-    def prev_image(self):
-        if self.scene.mode != STATUSMode.VIEW:
-            return
-        if self.current_index is None:
-            return
-        current_index = self.current_index - 1
-        if current_index < 0:
-            QtWidgets.QMessageBox.warning(self, 'Warning', 'This is the first picture.')
-        else:
-            self.show_image(current_index)
+    # def prev_image(self):
+    #     if self.scene.mode != STATUSMode.VIEW:
+    #         return
+    #     if self.current_index is None:
+    #         return
+    #     current_index = self.current_index - 1
+    #     if current_index < 0:
+    #         QtWidgets.QMessageBox.warning(self, 'Warning', 'This is the first picture.')
+    #     else:
+    #         self.show_image(current_index)
 
+    # def next_image(self):
+    #     if self.scene.mode != STATUSMode.VIEW:
+    #         return
+    #     if self.current_index is None:
+    #         return
+    #     current_index = self.current_index + 1
+    #     if current_index > len(self.files_list) - 1:
+    #         QtWidgets.QMessageBox.warning(self, 'Warning', 'This is the last picture.')
+    #     else:
+    #         self.show_image(current_index)
+    # 修改next_image方法
     def next_image(self):
         if self.scene.mode != STATUSMode.VIEW:
             return
         if self.current_index is None:
             return
+
+        # 新增过滤逻辑
+        def find_next_annotated(start_idx):
+            for i in range(start_idx + 1, len(self.files_list)):
+                img_path = os.path.join(self.image_root, self.files_list[i])
+                json_path = os.path.splitext(img_path)[0] + '.json'
+                if os.path.exists(json_path):
+                    return i
+            return None
+
         current_index = self.current_index + 1
-        if current_index > len(self.files_list) - 1:
-            QtWidgets.QMessageBox.warning(self, 'Warning', 'This is the last picture.')
+        if self.filter_annotated:
+            found_idx = find_next_annotated(self.current_index)
+            if found_idx is not None:
+                self.show_image(found_idx)
+            else:
+                QtWidgets.QMessageBox.warning(self, 'Warning', 'No more annotated images.')
         else:
-            self.show_image(current_index)
+            if current_index > len(self.files_list) - 1:
+                QtWidgets.QMessageBox.warning(self, 'Warning', 'This is the last picture.')
+            else:
+                self.show_image(current_index)
+
+    # 修改prev_image方法（同理）
+    def prev_image(self):
+        if self.scene.mode != STATUSMode.VIEW:
+            return
+        if self.current_index is None:
+            return
+
+        # 新增过滤逻辑
+        def find_prev_annotated(start_idx):
+            for i in range(start_idx - 1, -1, -1):
+                img_path = os.path.join(self.image_root, self.files_list[i])
+                json_path = os.path.splitext(img_path)[0] + '.json'
+                if os.path.exists(json_path):
+                    return i
+            return None
+
+        current_index = self.current_index - 1
+        if self.filter_annotated:
+            found_idx = find_prev_annotated(self.current_index)
+            if found_idx is not None:
+                self.show_image(found_idx)
+            else:
+                QtWidgets.QMessageBox.warning(self, 'Warning', 'No previous annotated images.')
+        else:
+            if current_index < 0:
+                QtWidgets.QMessageBox.warning(self, 'Warning', 'This is the first picture.')
+            else:
+                self.show_image(current_index)
+
+    # 新增过滤模式切换方法
+    # def toggle_filter_mode(self):
+    #     self.filter_annotated = not self.filter_annotated
+    #     state = "ON" if self.filter_annotated else "OFF"
+    #     self.statusBar().showMessage(f"Annotation filter mode: {state}", 3000)
+    #     print("filter_annotated:",self.filter_annotated)
+    # def toggle_filter_mode(self, checked):
+    #     self.filter_annotated = checked
+    #     state = "ON" if checked else "OFF"
+    #     self.statusBar().showMessage(f"标注过滤模式: {state}", 3000)
+    def toggle_filter_mode(self, checked):
+        #print("切换图片过滤翻页模式")
+        """切换标注过滤模式"""
+        self.filter_annotated = checked
+        
+        # 更新按钮状态显示
+        self.actionToggleFilter.setIconText("图片过滤翻页: {}".format("开" if checked else "关"))
+        
+        # 状态栏提示（保持原有逻辑）
+        state = "ON" if checked else "OFF"
+        self.statusBar().showMessage(f"图片过滤翻页: {state}", 3000)
+    
+        
+       
 
     def jump_to(self):
         index = self.files_dock_widget.lineEdit_jump.text()

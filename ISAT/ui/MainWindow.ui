@@ -108,6 +108,7 @@
     <addaction name="actionPrev_group"/>
     <addaction name="actionNext_group"/>
     <addaction name="actionVisible"/>
+    <addaction name="actionToggleFilter"/>
     <addaction name="separator"/>
     <addaction name="actionBit_map"/>
     <addaction name="separator"/>
@@ -268,6 +269,7 @@
    <addaction name="actionFit_window"/>
    <addaction name="actionBit_map"/>
    <addaction name="actionVisible"/>
+   <addaction name="actionToggleFilter"/>
   </widget>
   <widget class="QDockWidget" name="info_dock">
    <property name="minimumSize">
@@ -723,6 +725,24 @@
    </property>
    <property name="shortcut">
     <string>V</string>
+   </property>
+  </action>
+  <action name="actionToggleFilter">
+   <property name="icon">
+    <iconset resource="../icons.qrc">
+     <normaloff>:/icon/icons/过滤_filter.svg</normaloff>:/icon/icons/过滤_filter.svg</iconset>
+   </property>
+   <property name="text">
+    <string>toggle filter</string>
+   </property>
+   <property name="toolTip">
+    <string>toggle filter</string>
+   </property>
+   <property name="statusTip">
+    <string>just jump to image with json file.</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+F</string>
    </property>
   </action>
   <action name="actionModel_manage">

@@ -341,6 +341,12 @@ class Ui_MainWindow(object):
         icon38.addPixmap(QtGui.QPixmap(":/icon/icons/中文_chinese.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actionLanguage.setIcon(icon38)
         self.actionLanguage.setObjectName("actionLanguage")
+        self.actionToggleFilter = QtWidgets.QAction(MainWindow)
+        icon39 = QtGui.QIcon()
+        icon39.addPixmap(QtGui.QPixmap(":/icon/icons/过滤_filter.svg"),QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.actionToggleFilter.setIcon(icon39)
+        self.actionToggleFilter.setCheckable(True)  # 设置为可切换状态
+        self.actionToggleFilter.setObjectName("actionToggleFilter")
         self.menuFile.addAction(self.actionImages_dir)
         self.menuFile.addAction(self.actionLabel_dir)
         self.menuFile.addSeparator()
@@ -355,6 +361,8 @@ class Ui_MainWindow(object):
         self.menuView.addAction(self.actionVisible)
         self.menuView.addSeparator()
         self.menuView.addAction(self.actionBit_map)
+        self.menuView.addSeparator()
+        self.menuView.addAction(self.actionToggleFilter)
         self.menuView.addSeparator()
         self.menuView.addAction(self.actionZoom_in)
         self.menuView.addAction(self.actionZoom_out)
@@ -437,11 +445,14 @@ class Ui_MainWindow(object):
         self.toolBar.addAction(self.actionFit_window)
         self.toolBar.addAction(self.actionBit_map)
         self.toolBar.addAction(self.actionVisible)
+        self.toolBar.addAction(self.actionToggleFilter)
         self.toolBar_2.addAction(self.actionModel_manage)
         self.toolBar_2.addAction(self.actionShortcut)
         self.toolBar_2.addAction(self.actionSetting)
         self.toolBar_2.addAction(self.actionLanguage)
         self.toolBar_2.addAction(self.actionAbout)
+
+    
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -502,6 +513,9 @@ class Ui_MainWindow(object):
         self.actionBit_map.setText(_translate("MainWindow", "Bit map"))
         self.actionBit_map.setStatusTip(_translate("MainWindow", "Show instance or segmeent state."))
         self.actionBit_map.setShortcut(_translate("MainWindow", "Space"))
+        self.actionToggleFilter.setText(_translate("MainWindow", "toggle filter"))#weijigne
+        self.actionToggleFilter.setStatusTip(_translate("MainWindow", "just jump to image with json file."))
+        self.actionToggleFilter.setShortcut(_translate("MainWindow", "Ctrl+F"))
         self.actionEdit.setText(_translate("MainWindow", "Edit"))
         self.actionEdit.setToolTip(_translate("MainWindow", "Edit polygon"))
         self.actionEdit.setStatusTip(_translate("MainWindow", "Edit polygon attribute."))
@@ -574,3 +588,5 @@ class Ui_MainWindow(object):
         self.actionWindow_shot.setText(_translate("MainWindow", "Window shot"))
         self.actionWindow_shot.setShortcut(_translate("MainWindow", "Ctrl+P"))
         self.actionLanguage.setText(_translate("MainWindow", "Language"))
+        
+
