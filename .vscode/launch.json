@@ -1,22 +1,20 @@
 {
-    // 使用 IntelliSense 了解相关属性。 
-    // 悬停以查看现有属性的描述。
-    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python Debugger: Current File",
+            "name": "Python: 当前项目调试",
             "type": "debugpy",
             "request": "launch",
-            "program": "${file}",
+            "program": "${workspaceFolder}/main.py", // 指定入口文件
+            "python": "/home/wegn/.pyenv/versions/venv_ISAT_torch-2.2.1_cp38/bin/python", // 明确指定解释器路径
+            "cwd": "${workspaceFolder}", // 设置工作目录
             "console": "integratedTerminal",
             "env": {
-                // 添加 CUDA 和 cuDNN 库路径
-                "LD_LIBRARY_PATH": "/usr/local/cuda/lib64:/usr/local/cudnn/lib64:${env:LD_LIBRARY_PATH}",
-                // 确保 Python 能找到项目根目录
-                "PYTHONPATH": "${workspaceFolder}"
+                "LD_LIBRARY_PATH": "/home/wegn/.pyenv/versions/venv_ISAT_torch-2.2.1_cp38/lib/python3.8/site-packages/nvidia/cudnn/lib:${env:LD_LIBRARY_PATH}",
+                "PYTHONPATH": "${workspaceFolder}:${env:PYTHONPATH}" // 添加项目根目录到PYTHONPATH
             },
-            "cwd": "${workspaceFolder}"
+            "args": [], // 可添加命令行参数
+            "justMyCode": false // 允许调试第三方库
         }
     ]
 }
